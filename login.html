@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Firebase App (core SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login with Profile & Logout</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      /* Basic reset */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #94B4C1;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+
+      .login-container {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        width: 350px;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      .btn-google, .btn-phone, .btn-logout {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #2980b9;
+        color: white;
+        font-weight: 600;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 16px;
+      }
+
+      .btn-google {
+        background: #2980b9;
+      }
+
+      .btn-google:hover {
+        background: #357ae8;
+      }
+
+      .btn-google i {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      .btn-phone {
+        background: #2980b9;
+      }
+
+      .btn-phone:hover {
+        background: #2980b9;
+      }
+
+      .btn-phone i {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      .btn-logout {
+        background: #d93025;
+      }
+
+      .btn-logout:hover {
+        background: #a8221a;
+      }
+
+      .btn-logout i {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      input[type="email"], input[type="password"] {
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border: 1.5px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="email"]:focus, input[type="password"]:focus {
+        border-color: black;
+        outline: none;
+      }
+
+      button[type="submit"] {
+        background: #2980b9;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button[type="submit"]:hover {
+        background: #0056b3;
+      }
+
+      .separator {
+        text-align: center;
+        margin: 20px 0;
+        position: relative;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .separator::before,
+      .separator::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 40%;
+        height: 1px;
+        background: #ccc;
+      }
+
+      .separator::before {
+        left: 0;
+      }
+
+      .separator::after {
+        right: 0;
+      }
+
+      .profile {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 20px;
+        width: 350px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .profile img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+
+      .profile h3 {
+        margin: 0 0 5px 0;
+        color: #333;
+      }
+
+      .profile p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+</head>
+<body>
+
+<!-- User profile section -->
+<div id="profile-section" class="profile" style="display:none;">
+  <img id="profile-pic" src="https://via.placeholder.com/80" alt="Profile Picture" />
+  <h3 id="profile-name"></h3>
+  <p id="profile-email"></p>
+</div>
+
+<!-- Login form and buttons -->
+<div class="login-container" id="login-container">
+
+  <h2>Login</h2>
+
+  <button class="btn-google" type="button" onclick="googleLogin()">
+    <i class="fab fa-google"></i> Continue with Google
+  </button>
+
+  <button class="btn-phone" type="button" onclick="phoneLogin()">
+    <i class="fas fa-phone"></i> Continue with Phone Number
+  </button>
+
+  <!-- Invisible reCAPTCHA container -->
+  <div id="recaptcha-container"></div>
+
+  <!-- Login form -->
+  <form action="login-user.php" method="post">
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <input type="password" name="password" placeholder="Enter your password" required />
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<!-- Logout section -->
+<div class="login-container" id="logout-container" style="display:none;">
+  <button class="btn-logout" type="button" onclick="reauthenticateAndLogout()">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+</div>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCvk4Q2HRlTXc0J5qdaOrZUQ75Wi2SOvbs",
+    authDomain: "homeservice-eb7b1.firebaseapp.com",
+    projectId: "homeservice-eb7b1",
+    storageBucket: "homeservice-eb7b1.appspot.com",
+    messagingSenderId: "208648038993",
+    appId: "1:208648038993:web:9336f63fb4a67708b16670",
+    measurementId: "G-Y131GYEBJV"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+
+  // Show profile if user logged in on page load
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      // User is signed in
+      showProfile(user);
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('logout-container').style.display = 'block';
+    } else {
+      // User not signed in
+      hideProfile();
+      document.getElementById('login-container').style.display = 'block';
+      document.getElementById('logout-container').style.display = 'none';
+    }
+  });
+
+  function showProfile(user) {
+    const profileSection = document.getElementById('profile-section');
+    const nameElem = document.getElementById('profile-name');
+    const emailElem = document.getElementById('profile-email');
+    const picElem = document.getElementById('profile-pic');
+
+    nameElem.textContent = user.displayName || "No name set";
+    emailElem.textContent = user.email || user.phoneNumber || "No email";
+    picElem.src = user.photoURL || "https://via.placeholder.com/80";
+
+    profileSection.style.display = 'block';
+  }
+
+  function hideProfile() {
+    document.getElementById('profile-section').style.display = 'none';
+  }
+
+  // Google login
+  function googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        alert(`Welcome, ${user.displayName}! You are logged in with Google.`);
+      })
+      .catch((error) => {
+        alert("Google login failed: " + error.message);
+      });
+  }
+
+  // Phone login (simplified prompt for demo)
+  function phoneLogin() {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+          // reCAPTCHA solved, proceed with phone sign-in
+        }
+      });
+      window.recaptchaVerifier.render();
+    }
+
+    let phoneNumber = prompt("Enter your phone number with country code (e.g., +1234567890):");
+    if (!phoneNumber) return alert("Phone number is required.");
+
+    const phoneRegex = /^\+\d{10,15}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      return alert("Invalid phone number format. Use + followed by country code and number (e.g., +1234567890).");
+    }
+
+    const appVerifier = window.recaptchaVerifier;
+
+    auth.signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        const code = prompt("Enter the OTP sent to your phone:");
+        return confirmationResult.confirm(code);
+      })
+      .then((result) => {
+        alert(`Phone login successful! Welcome, ${result.user.phoneNumber}`);
+      })
+      .catch((error) => {
+        alert("Phone login failed: " + error.message);
+      });
+  }
+
+  // Reauthentication before logout with Google popup
+  function reauthenticateAndLogout() {
+    const user = auth.currentUser;
+    if (!user) {
+      alert("No user logged in");
+      return;
+    }
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    user.reauthenticateWithPopup(provider)
+      .then(() => {
+        alert("Reauthentication successful! Logging out...");
+        return auth.signOut();
+      })
+      .then(() => {
+        alert("Logout successful!");
+        // UI updates handled by onAuthStateChanged listener
+      })
+      .catch((error) => {
+        alert("Reauthentication failed: " + error.message);
+      });
+  }
+</script>
+
+</body>
+</html>

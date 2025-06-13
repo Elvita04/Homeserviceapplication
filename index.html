@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home Service App</title>
+  <style>
+    /* Reset & basics */
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+     body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+             background-image: url("https://plus.unsplash.com/premium_photo-1674773520212-0e3efeafde89?q=80&w=2016&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: cover;
+            color: #fff;
+
+        }
+    a {
+      color:  #1abc9c;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color:  #1abc9c;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+  margin-top: 30px;
+  /* Remove background color */
+  /* background: #34495e; */
+  
+  color: #ecf0f1;
+  padding: 60px 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  
+  /* Add subtle text shadow for better visibility on image */
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+}
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+    }
+    header p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Section styling */
+    section {
+      background: white;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      color: #34495e;
+    }
+
+    /* Section headings */
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1abc9c;
+      border-bottom: 3px #1abc9c;
+      padding-bottom: 8px;
+      max-width: 300px;
+    }
+
+    /* Flex container for cards */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+    }
+
+    /* Single card */
+    .card {
+      background: #ecf0f1;
+      flex: 1 1 280px;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    /* Card image */
+    .card img {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    /* Card title */
+    .card h3 {
+      margin-bottom: 12px;
+      color: #34495e;
+    }
+
+    /* Card text */
+    .card p {
+      color: #7f8c8d;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    /* Call to action buttons */
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      background:#2980b9;
+      color: white;
+      padding: 12px 28px;
+      font-weight: 600;
+      border-radius: 50px;
+      box-shadow: 0 6px 15px rgba(26,188,156,0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #2980b9;
+      box-shadow: 0 8px 20px rgba(22,160,133,0.7);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: black;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .cards {
+        flex-direction: column;
+      }
+      .top-right-login {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  z-index: 999;
+}
+
+    }
+
+  </style>
+</head>
+<body>
+<div style="position: absolute; top: 20px; right: 30px; z-index: 999;">
+  <a href="login.html" title="Login" style="color: white; font-size: 1.2rem; display: flex; align-items: center; text-decoration: none; background: rgba(0, 0, 0, 0.5); padding: 10px 18px; border-radius: 30px; font-weight: bold;">
+    <i class="fas fa-user-circle" style="margin-right: 8px; font-size: 1.5rem;"></i>
+    <span>Login</span>
+  </a>
+</div>
+
+
+
+  <header>
+    <h1>Welcome to EliteHomeCare</h1>
+    <p>Introducing Elite HomeCare💙 — your trusted partner for expert home repairs, deep cleaning, and maintenance done right. We bring skilled professionals to your doorstep, delivering fast, reliable, and high-quality service that brings peace of mind to your everyday living. Whether it’s a leaky tap or a full-home glow-up, we’re here to make your space truly shine. Because your home isn’t just a place — it’s your sanctuary, and it deserves nothing but elite care.</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Get Started Today Section (Now on Top) -->
+    <section id="bookings" style="margin-top: 0;">
+      <h2>Get Started Today</h2>
+      <p>Whether you're ready to schedule your next home service or just curious to explore our trusted professionals and the exceptional care we offer, dive in below and take the first step toward making your home a happier, healthier place!</p>
+      <div style="text-align:center; margin-top: 30px;">
+        <a href="book_service.php" class="btn" style="margin-right: 20px;">Book a Service</a>
+        <a href="providers.php" class="btn" style="margin-right: 20px;">View Providers</a>
+        <a href="reviews.php" class="btn"style="margin-right: 20px;">Why Choose Us</a>
+        <a href="contact copy.php" class="btn">Contact Us</a>
+      </div>
+    </section>
+
+    <!-- Our Popular Services Section -->
+    <section id="services">
+      <h2>Our Popular Services</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGx1bWJpbmd8ZW58MHx8MHx8fDA%3D" alt="Plumbing">
+          <h3>Plumbing</h3>
+          <p>Fix leaks, clogged drains, pipe installation, and more.</p>
+           <a href="book_plumbing.php" class="btn">View</a>
+
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80" alt="Cleaning">
+          <h3>Cleaning</h3>
+          <p>Home deep cleaning, carpets, windows, and sanitation.</p>
+          <a href="book_cleaning.php" class="btn">View</a>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Electrical">
+          <h3>Electrical Work</h3>
+          <p>Light fixture installation, wiring, and electrical repairs.</p>
+          <a href="book_electrical.php" class="btn">View</a>
+        </div>
+        <div class="card">
+          <img src="https://plus.unsplash.com/premium_photo-1682126012378-859ca7a9f4cf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWMlMjByZXBhaXJ8ZW58MHx8MHx8fDA%3D" alt="AC Repair">
+          <h3>AC Repair</h3>
+          <p>Stay cool with expert AC servicing, repair, and installation.</p>
+          <a href="book_ac.php" class="btn">View</a>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1581578017093-cd30fce4eeb7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVzdCUyMGNvbnRyb2x8ZW58MHx8MHx8fDA%3D" alt="Pest Control">
+          <h3>Pest Control</h3>
+          <p>Safe & effective solutions for insects, rodents, and termites.</p>
+          <a href="book_pest.php" class="btn">View</a>
+        </div>
+        <div class="card">
+          <img src="https://plus.unsplash.com/premium_photo-1664300494539-313eac2a6095?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FycGVudHJ5fGVufDB8fDB8fHww" alt="Carpentry">
+          <h3>Carpentry</h3>
+          <p>Custom furniture, door fittings, wooden repairs & more.</p>
+          <a href="book_carpentry.php" class="btn">View</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Providers Section -->
+    <section id="providers" style="margin-top: 60px;">
+      <h2>Our Trusted Providers</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" alt="Provider 1">
+          <h3>John's Plumbing Co.</h3>
+          <p>Expert plumbers with 10+ years of experience.</p>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNsZWFuc3dlZXBwcm9zfGVufDB8fDB8fHww" alt="Provider 2">
+          <h3>CleanSweep Pros</h3>
+          <p>Professional cleaning with eco-friendly products.</p>
+        </div>
+        <div class="card">
+          <img src="https://plus.unsplash.com/premium_photo-1682148183600-37cd45353dd0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZWxlY3RyaWNpYW5zfGVufDB8fDB8fHww" alt="Provider 3">
+          <h3>BrightSpark Electricians</h3>
+          <p>Certified electricians for safe & reliable work.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+
+
+  <footer>
+    &copy; 2025 Home Service App. All rights reserved.
+  </footer>
+
+
+</body>
+</html>

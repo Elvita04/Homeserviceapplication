@@ -1,0 +1,150 @@
+/* Body and page background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  color: #1f2937; /* dark slate */
+  margin: 40px auto;
+  max-width: 1000px;
+  padding: 20px;
+}
+
+/* Page heading */
+h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  color: #334e68; /* dark blue-gray */
+}
+
+/* Service card container */
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  padding: 25px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect on cards */
+.service-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-6px);
+}
+
+/* Service image styling */
+.service-image {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+/* Service text details */
+.service-details {
+  flex-grow: 1;
+}
+
+/* Service name */
+.service-details h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.8rem;
+  color: #1d4ed8; /* professional blue */
+  font-weight: 700;
+}
+
+/* Description text */
+.service-details p {
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #475569; /* muted dark blue-gray */
+}
+
+/* Price styling */
+.service-details strong {
+  font-size: 1.3rem;
+  color: #16a34a; /* vibrant green */
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .service-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .service-image {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 15px;
+  }
+}
+form {
+  background: #fff;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto 40px auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #334e68;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #cbd5e1;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb; /* blue focus */
+  outline: none;
+}
+
+input[type="submit"] {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #1e40af;
+}
+
+.message {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #d1fae5;
+  border: 1px solid #22c55e;
+  color: #166534;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+}
